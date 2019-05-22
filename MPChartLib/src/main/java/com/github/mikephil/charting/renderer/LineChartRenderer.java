@@ -3,6 +3,7 @@ package com.github.mikephil.charting.renderer;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.drawable.Drawable;
@@ -17,6 +18,7 @@ import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.dataprovider.LineDataProvider;
 import com.github.mikephil.charting.interfaces.datasets.IDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.model.GradientColor;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.MPPointD;
 import com.github.mikephil.charting.utils.MPPointF;
@@ -173,7 +175,20 @@ public class LineChartRenderer extends LineRadarRenderer {
             drawCubicFill(mBitmapCanvas, dataSet, cubicFillPath, trans, mXBounds);
         }
 
-        mRenderPaint.setColor(dataSet.getColor());
+        if (dataSet.getGradientColor() != null) {
+            GradientColor gradientColor = dataSet.getGradientColor();
+            mRenderPaint.setShader(
+                    new LinearGradient(
+                            0,
+                            0,
+                            mBitmapCanvas.getWidth(),
+                            0,
+                            gradientColor.getStartColor(),
+                            gradientColor.getEndColor(),
+                            android.graphics.Shader.TileMode.MIRROR));
+        } else {
+            mRenderPaint.setColor(dataSet.getColor());
+        }
 
         mRenderPaint.setStyle(Paint.Style.STROKE);
 
@@ -251,7 +266,20 @@ public class LineChartRenderer extends LineRadarRenderer {
             drawCubicFill(mBitmapCanvas, dataSet, cubicFillPath, trans, mXBounds);
         }
 
-        mRenderPaint.setColor(dataSet.getColor());
+        if (dataSet.getGradientColor() != null) {
+            GradientColor gradientColor = dataSet.getGradientColor();
+            mRenderPaint.setShader(
+                    new LinearGradient(
+                            0,
+                            0,
+                            mBitmapCanvas.getWidth(),
+                            0,
+                            gradientColor.getStartColor(),
+                            gradientColor.getEndColor(),
+                            android.graphics.Shader.TileMode.MIRROR));
+        } else {
+            mRenderPaint.setColor(dataSet.getColor());
+        }
 
         mRenderPaint.setStyle(Paint.Style.STROKE);
 

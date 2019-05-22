@@ -4,6 +4,7 @@ package com.xxmassdeveloper.mpchartexample;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import androidx.core.content.ContextCompat;
@@ -132,7 +133,12 @@ public class InvertedLineChartActivity extends DemoBase implements OnSeekBarChan
         // create a dataset and give it a type
         LineDataSet set1 = new LineDataSet(entries, "DataSet 1");
 
-        set1.setLineWidth(1.5f);
+        set1.setLineWidth(6f);
+        set1.setDrawValues(false);
+        set1.setDrawCircles(false);
+        set1.setDrawCircleHole(false);
+        set1.setGradientColor(Color.parseColor("#FF9900"), Color.parseColor("#FF6FD2"));
+        set1.setMode(LineDataSet.Mode.CUBIC_BEZIER);
         set1.setCircleRadius(4f);
 
         // create a data object with the data sets
